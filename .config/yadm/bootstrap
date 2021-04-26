@@ -1,0 +1,3 @@
+#!/bin/bash
+yadm remote set-url origin ssh://git@github.com/cwarlich/dotfiles
+yadm decrypt
