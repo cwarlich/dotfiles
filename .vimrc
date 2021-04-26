@@ -26,3 +26,52 @@ autocmd VimEnter * wincmd l
 autocmd TabLeave * wincmd l
 " ... and for any additional tab loaded on vim startup, i.e. using vim's -p option
 autocmd TabEnter * wincmd l
+
+"""""""""""""""""""""""""""""""""""""""""""""""
+" Auto-reload .vimrc and friends when changed "
+"""""""""""""""""""""""""""""""""""""""""""""""
+if has ('autocmd') " Remain compatible with earlier versions
+ augroup vimrc     " Source vim configuration upon save
+    autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
+    autocmd! BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
+  augroup END
+endif " has autocmd
+
+""""""""""""""""
+" set spelling "
+""""""""""""""""
+setlocal spelllang=en
+set spell spelllang=en
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Highlight trailing spaces                           "
+" http://vim.wikia.com/wiki/Highlight_unwanted_spaces "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$\| \+\ze\t/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+set list listchars=tab:>-,trail:.,extends:>,precedes:<
+
+"""""""""""""""""""""""""""""""""
+" highlight after 80 characters "
+"""""""""""""""""""""""""""""""""
+let &colorcolumn=join(range(81,81),",")
+highlight ColorColumn ctermbg=235 guibg=#ecede7
+
+""""""""""""""""""""""""""""
+" Highlight search results "
+""""""""""""""""""""""""""""
+set hlsearch
+
+""""""""""""""""""""""""""""""""""""""""""""
+" We want more than just 10 tabs initially "
+""""""""""""""""""""""""""""""""""""""""""""
+set tabpagemax=100
+
+"""""""""""""""""""""""""
+" Display line numbers. "
+"""""""""""""""""""""""""
+set nu
