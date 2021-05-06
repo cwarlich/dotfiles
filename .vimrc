@@ -75,3 +75,26 @@ set tabpagemax=100
 " Display line numbers. "
 """""""""""""""""""""""""
 set nu
+
+"""""""""""""""""""""""""""""""""""
+" Vim backup, swap and undo files "
+"""""""""""""""""""""""""""""""""""
+let tmp_dir=expand('~/.vim/tmp', 1)
+let backup_dir=tmp_dir.'/backup//'
+let swap_dir=tmp_dir.'/swap//'
+let undo_dir=tmp_dir.'/undo//'
+if !isdirectory(backup_dir)
+  call mkdir(backup_dir, 'p')
+endif
+if !isdirectory(swap_dir)
+  call mkdir(swap_dir, 'p')
+endif
+if !isdirectory(undo_dir)
+  call mkdir(undo_dir, 'p')
+endif
+let &backupdir=backup_dir
+let &directory=swap_dir
+let &undodir=undo_dir
+set backup
+set writebackup
+set undofile
