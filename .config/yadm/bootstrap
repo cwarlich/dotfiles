@@ -1,3 +1,15 @@
 #!/bin/bash
+# Change https access to ssh.
 yadm remote set-url origin ssh://git@github.com/cwarlich/dotfiles
+# Decrypt secrets from ~/.local/yadm/encrypt.
 yadm decrypt
+# Install rclone
+curl https://rclone.org/install.sh | sudo bash
+# Mount gdrive: to ~/mnt/gdrive, see
+# ~/.config/rclone/rclone.conf
+# and
+# ~/.config/systemd/user/rclone@.service
+# and for a more comprehensive description
+# https://medium.com/@artur.klauser/mounting-google-drive-on-raspberry-pi-f5002c7095c2
+systemctl --user enable rclone@gdrive
+systemctl --user start rclone@gdrive
