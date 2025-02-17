@@ -29,7 +29,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null && [[ $TERM =~ color ]]; then
+if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null && [ "$(tput colors)" -ge 8 ]; then
 	# We have color support; assume it's compliant with Ecma-48
 	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
 	# a case would tend to support setf rather than setaf.)
